@@ -8,9 +8,14 @@ from rich.table import Table
 
 console = Console()
 
+#por ahora vo ya dejar el script funcional apra el servidor que estya usando Journal ISO 8601
+#esto tambien se podria chequear segun cada servidor a ver si usa el standar o journal y segun eso cmabiar
+#el pattenr de la fecha que es donde trae conflico o diferenciam ejor dicho
+
 # ---------- PATTERNS ----------
 pattern_sshd = re.compile(
-    r'(?P<date>\w{3}\s+\d+\s[\d:]+)\s+'            
+    # r'(?P<date>\w{3}\s+\d+\s[\d:]+)\s+'            
+    r'(?P<date>\d{4}-\d{2}-\d{2}T[\d:.+-]+)\s+'
     r'(?P<host>\S+)\s+'                            
     r'sshd\[\d+\]:\s+'
     r'Failed password for (?:invalid user\s+)?'   
@@ -19,13 +24,15 @@ pattern_sshd = re.compile(
 )
 
 pattern_sudo_pam = re.compile(
-    r'(?P<date>\w{3}\s+\d+\s[\d:]+)\s+'
+    # r'(?P<date>\w{3}\s+\d+\s[\d:]+)\s+'
+    r'(?P<date>\d{4}-\d{2}-\d{2}T[\d:.+-]+)\s+'
     r'(?P<host>\S+)\s+sudo:\s+pam_unix\([^\)]+\):\s+authentication failure;.*user=(?P<user>\S+)',
     re.IGNORECASE
 )
 
 pattern_sudo_summary = re.compile(
-    r'(?P<date>\w{3}\s+\d+\s[\d:]+)\s+'
+    # r'(?P<date>\w{3}\s+\d+\s[\d:]+)\s+'
+    r'(?P<date>\d{4}-\d{2}-\d{2}T[\d:.+-]+)\s+'
     r'(?P<host>\S+)\s+sudo:\s+'
     r'(?P<user>\S+)\s*:\s*(?P<count>\d+)\s+incorrect password attempts',
     re.IGNORECASE
