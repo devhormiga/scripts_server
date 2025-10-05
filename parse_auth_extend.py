@@ -97,7 +97,7 @@ def main():
     log_file = Path("/var/log/auth.log.1") 
     # al crear el csv habria que chequer si el archivo existe y elegir si :
     # actualizar el archivo o crear otro
-    
+
     csv_file = Path.home() / "output_logs" 
 
     if not log_file.exists():
@@ -109,5 +109,5 @@ def main():
     save_csv(entries, csv_file)
     console.print(f"[green]Guardado CSV en:[/green] {csv_file}")
 
-if __name__ == "__main__":+
+if __name__ == "__main__":
     main()
